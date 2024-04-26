@@ -69,7 +69,17 @@ export default function Tags() {
         }
       else{
         console.log("comparing your Packages")
-        setTableCheck(true)
+        setTableCheck(true);
+        const rows = [
+          createData('Description',selectedPacakges[0].package.description, selectedPacakges[0].package.description),
+          // createData('Keywords', 237, 9.0,),
+          // createData('Repository', 262, 16.0,),
+          // createData('Licenses', 305, 3.7,),
+          // createData('Last Modification Date', 356, 16.0),
+          createData('Authors/publishers', selectedPacakges[0].package.name,selectedPacakges[0].package.name),
+          // createData('Maintainers', 356, 16.0)
+        ];
+        setRowdata(rows);
       }
     }
 
@@ -95,22 +105,14 @@ export default function Tags() {
     }));
     
     function createData(
-      name: string,
-      calories: number,
-      fat: number,
-      carbs: number,
-      protein: number,
+      attributeName: string,
+      firstPackageValue: string,
+      secondPackagevalue: string
     ) {
-      return { name, calories, fat, carbs, protein };
+      return { attributeName,  firstPackageValue,   secondPackagevalue};
     }
     
-    const rows = [
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
+    
     
 
   return (
@@ -144,28 +146,25 @@ export default function Tags() {
 
     {
       tableCheck?
-      <Box>
+      <Box mt={3} p={10}>
          <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Package Name</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell align="right">{selectedPacakges[0].package.name}</StyledTableCell>
+            <StyledTableCell align="right">{selectedPacakges[1].package.name}</StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {rowData.map((row) => (
+            <StyledTableRow key={row.attributeName}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.attributeName}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row.firstPackageValue}</StyledTableCell>
+              <StyledTableCell align="right">{row.secondPackagevalue}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
