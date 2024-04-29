@@ -96,7 +96,7 @@ export default function ComparisonTable({ selectedPackages }) {
         createData('Description', firstPackagedata.collected.metadata.name, secondPackageData.collected.metadata.description),
         createData('Keywords', firstPackagedata.collected.metadata.keywords?firstPackagedata.collected.metadata.keywords[0]:"N/A", secondPackageData.collected.metadata.keywords?secondPackageData.collected.metadata.keywords[0]:"N/A"),
         createData('License', firstPackagedata.collected.metadata.license?firstPackagedata.collected.metadata.license:"N/A",secondPackageData.collected.metadata.license?secondPackageData.collected.metadata.license:"N/A"),
-        createData('Last Modification Date', firstPackagedata.analyzedAt, secondPackageData.analyzedAt),
+        createData('Last Modification Date', firstPackagedata.analyzedAt.slice(10), secondPackageData.analyzedAt.slice(10)),
         createData('Authors/Publishers', firstPackagedata.collected.metadata.author?firstPackagedata.collected.metadata.author.name:"N/A", secondPackageData.collected.metadata.author?secondPackageData.collected.metadata.author.name:"N/A"),
         createData('Maintainers', firstPackagedata.collected.metadata.maintainers[0]?firstPackagedata.collected.metadata.maintainers[0].username:"null", secondPackageData.collected.metadata.maintainers[0]?secondPackageData.collected.metadata.maintainers[0].username:"null"),
       ]);
@@ -115,35 +115,49 @@ export default function ComparisonTable({ selectedPackages }) {
     <>
       {firstPackagedata &&secondPackageData&& (
         <>
-        <TableContainer component={Paper} elevation={5} sx={{
-                padding: 3,
-                width:"65%",
-                marginLeft:'auto',
-                marginRight:'auto',
-                marginTop:10,
-                marginBottom:3
-          }} >
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Package Name</TableCell>
-                <TableCell align="right">{firstPackagedata?.collected.metadata.name}</TableCell>
-                <TableCell align="right">{secondPackageData?.collected.metadata.name}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row">
-                    {row.packageName}
-                  </TableCell>
-                  <TableCell align="right">{row.firstPackageValue}</TableCell>
-                  <TableCell align="right">{row.secondPackageValue}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+       <TableContainer component={Paper} elevation={5} sx={{
+    padding: 3,
+    width: "65%",
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 10,
+    marginBottom: 3,
+    "& table": {
+      minWidth: 650,
+      borderCollapse: 'separate',
+      borderSpacing: '0 1rem',
+      "& th, & td": {
+        textAlign: 'center',
+        padding: '0.5rem',
+        border: '1px solid #e0e0e0',
+      },
+      "& th": {
+        backgroundColor: '#f5f5f5',
+      },
+    },
+}}>
+  <Table aria-label="simple table">
+    <TableHead>
+      <TableRow>
+        <TableCell style={{ backgroundColor: 'transparent' }}>Package Name</TableCell>
+        <TableCell align="right">{firstPackagedata?.collected.metadata.name}</TableCell>
+        <TableCell align="right">{secondPackageData?.collected.metadata.name}</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {rows.map((row, index) => (
+        <TableRow key={index}>
+          <TableCell component="th" scope="row" style={{ textAlign: 'center' }}>
+            {row.packageName}
+          </TableCell>
+          <TableCell align="right">{row.firstPackageValue}</TableCell>
+          <TableCell align="right">{row.secondPackageValue}</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+
         <DownloadsGraph packageOne={firstPackagedata} packageTwo={secondPackageData}/>
       </>
       )}
