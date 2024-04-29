@@ -7,6 +7,7 @@ import {debounce } from 'lodash';
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import ComparisonTable from './ComparisonTable';
+import { Typography } from '@mui/material';
 
 
 export default function Tags() {
@@ -58,7 +59,9 @@ export default function Tags() {
   
   return (
     <>
-    <Stack spacing={2} sx={{ width: '100%'}} direction="row" justifyContent="center">
+    <Stack  sx={{ textAlign:"center", marginTop:5}}>
+      <Typography variant='h3'>Compare NPM Packages</Typography>
+    <Stack spacing={2} sx={{ width: '100%', marginTop:6}} direction="row" justifyContent="center">
       <Autocomplete
         multiple
         id="tags-outlined"
@@ -85,6 +88,7 @@ export default function Tags() {
         sx={{ width: '70%'}}
       />
        <Button variant="contained" onClick={handleCompareClick}>Compare</Button>
+    </Stack>
     </Stack>
     {
       comparisonCheck?

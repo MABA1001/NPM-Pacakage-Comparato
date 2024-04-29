@@ -43,7 +43,7 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
         <>
         {
         Object.keys(packageData).length>0&&
-        <Stack>
+        <Stack sx={{marginTop:8}}>
             <Paper elevation={5}  sx={{
                 padding: 3,
                 width:"65%",

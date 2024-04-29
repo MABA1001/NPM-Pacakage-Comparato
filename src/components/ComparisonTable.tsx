@@ -69,7 +69,7 @@ export default function ComparisonTable({ selectedPackages }) {
                 width:"65%",
                 marginLeft:'auto',
                 marginRight:'auto',
-                marginTop:6,
+                marginTop:10,
                 marginBottom:3
           }} >
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
