@@ -36,7 +36,7 @@ export default function Tags() {
     // Debouncing function, delay the Api call for a given time.
     const debouncedSearch = debounce((searchTerm:string) => {
       fetchData(searchTerm);
-    }, 200);
+    }, 500);
     
 
     //handel text change in search filed
