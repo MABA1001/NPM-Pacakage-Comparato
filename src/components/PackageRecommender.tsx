@@ -49,6 +49,8 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
                 width:"65%",
                 marginLeft:'auto',
                 marginRight:'auto',
+                backgroundColor:'#000066',
+                color:"white"
           }} >
                 <Typography variant="h4"sx={{
                 textAlign: 'center',
@@ -79,7 +81,7 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
         </Typography>
                 </Stack>
                 <Stack direction={'row'} sx={{width:"50%"}}>
-                    <Paper elevation={3} sx={{width:"30%", textAlign:"center",  padding:2}} >
+                    <Paper elevation={3} sx={{width:"30%", textAlign:"center",  padding:2, backgroundColor:"#7DBB00"}} >
                     <Typography variant='h6' >
                         Downloads
                         </Typography>
@@ -87,7 +89,7 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
                         {`${Math.round(packageData.evaluation.popularity.downloadsCount)}+`} 
                         </Typography>
                         </Paper>
-                    <Paper  elevation={3}  sx={{width:"30%", marginLeft:1,textAlign:"center",  padding:2}}>
+                    <Paper  elevation={3}  sx={{width:"30%", marginLeft:1,textAlign:"center", backgroundColor:"#FFCC00" , padding:2}}>
                     <Typography variant='h6'>
                         Stars
                     </Typography>
@@ -95,7 +97,7 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
                         {`${Math.round(packageData.collected.npm.starsCount)}+`} 
                         </Typography>
                     </Paper >
-                    <Paper  elevation={3} sx={{width:"30%", marginLeft:1, textAlign:"center", padding:2}}>
+                    <Paper  elevation={3} sx={{width:"30%", marginLeft:1, textAlign:"center", padding:2, backgroundColor:"#FF474c"}}>
                     <Typography variant='h6'>
                         Health
                     </Typography>
@@ -104,16 +106,22 @@ export default function PackageRecommender({ packageOne, packageTwo }) {
                 </Stack>
                 </Stack>
                 <Stack>
-                    <Typography>
-                        Languages
-                    </Typography>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <div style={{flex: 1, height: '1px', backgroundColor: 'black'}} />
+
+                <div>
+                <p style={{width: '100px', textAlign: 'center'}}><Typography variant='h6'>Languages</Typography></p>
+                </div>
+
+                <div style={{flex: 1, height: '1px', backgroundColor: 'black'}} />
+                </div>
                     <Stack direction={"row"}>
-                        <Paper elevation={3} sx={{padding:1}} >
+                        <Paper elevation={5} sx={{padding:1}} >
                             <Typography variant='subtitle1'>
                                 Javascript
                             </Typography>
                         </Paper>
-                        <Paper elevation={3}  sx={{marginLeft: 2, padding:1}}>
+                        <Paper elevation={5}  sx={{marginLeft: 2, padding:1}}>
                             <Typography variant='subtitle1'>
                                 Typescript
                             </Typography>
