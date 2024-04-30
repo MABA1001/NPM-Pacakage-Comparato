@@ -96,7 +96,7 @@ export default function ComparisonTable({ selectedPackages }) {
         createData('Description', firstPackagedata.collected.metadata.name, secondPackageData.collected.metadata.description),
         createData('Keywords', firstPackagedata.collected.metadata.keywords?firstPackagedata.collected.metadata.keywords[0]:"N/A", secondPackageData.collected.metadata.keywords?secondPackageData.collected.metadata.keywords[0]:"N/A"),
         createData('License', firstPackagedata.collected.metadata.license?firstPackagedata.collected.metadata.license:"N/A",secondPackageData.collected.metadata.license?secondPackageData.collected.metadata.license:"N/A"),
-        createData('Last Modification Date', firstPackagedata.analyzedAt.slice(10), secondPackageData.analyzedAt.slice(10)),
+        createData('Last Modification Date', firstPackagedata.analyzedAt.slice(0,10), secondPackageData.analyzedAt.slice(0,10)),
         createData('Authors/Publishers', firstPackagedata.collected.metadata.author?firstPackagedata.collected.metadata.author.name:"N/A", secondPackageData.collected.metadata.author?secondPackageData.collected.metadata.author.name:"N/A"),
         createData('Maintainers', firstPackagedata.collected.metadata.maintainers[0]?firstPackagedata.collected.metadata.maintainers[0].username:"null", secondPackageData.collected.metadata.maintainers[0]?secondPackageData.collected.metadata.maintainers[0].username:"null"),
       ]);

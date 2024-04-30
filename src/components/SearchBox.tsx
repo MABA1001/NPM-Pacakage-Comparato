@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import {debounce } from 'lodash';
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import ComparisonTable from './ComparisonTable';
 import { Typography } from '@mui/material';
+import { useDebouncedCallback } from 'use-debounce';
 
 
 export default function Tags() {
@@ -33,16 +33,17 @@ export default function Tags() {
      
     };
     
-    // Debouncing function, delay the Api call for a given time.
-    const debouncedSearch = debounce((searchTerm:string) => {
-      fetchData(searchTerm);
-    }, 500);
-    
+  
+  const debounced = useDebouncedCallback(
+    (value)=>fetchData(value),
+    1000
+  );
 
     //handel text change in search filed
     const handleInputChange = (event,value:string):void => {
       setInputValue(value);
-      debouncedSearch(value);
+      debounced(value);
+
     };
 
     // handle Compare button click
