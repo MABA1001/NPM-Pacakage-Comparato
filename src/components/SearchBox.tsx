@@ -8,7 +8,9 @@ import Button from '@mui/material/Button';
 import ComparisonTable from './ComparisonTable';
 import { Typography } from '@mui/material';
 import { useDebouncedCallback } from 'use-debounce';
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle'; 
+import Snackbar from '@mui/material/Snackbar';
 
 export default function Tags() {
   //variable initializations
@@ -16,7 +18,8 @@ export default function Tags() {
     const [inputValue, setInputValue] = useState('');
     const [searchResults,setSearchResults]=useState([]);
     const [selectedPacakges, setSelectedPackages]=useState([]);
-    const [comparisonCheck, setComparisonCheck]=useState(false);
+    const [comparisonCheck, setComparisonCheck] = useState(false);
+    const [open, setOpen] = useState(false);
     
     
     //Fuction : for Api call
@@ -50,13 +53,21 @@ export default function Tags() {
     const handleCompareClick=()=>{
       if(selectedPacakges.length<2)
         {
-          alert("Should have minimum two packages")
+          setOpen(true);
         }
       else{
         console.log("comparing your Packages")
         setComparisonCheck(true);
       }
+  }
+  
+   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
     }
+
+    setOpen(false);
+  };
   
   return (
     <>
@@ -88,7 +99,17 @@ export default function Tags() {
         )}
         sx={{ width: '70%'}}
       />
-       <Button variant="contained" onClick={handleCompareClick}>Compare</Button>
+          <Button variant="contained" onClick={handleCompareClick}>Compare</Button>
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="info"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+         Select Two packages to compare
+        </Alert>
+      </Snackbar>
     </Stack>
     </Stack>
     {
