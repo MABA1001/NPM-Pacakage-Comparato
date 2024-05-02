@@ -5,20 +5,10 @@ import dayjs from 'dayjs';
 import numeral from 'numeral'; // Import numeral library
 import { Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { DateArray, NumberArray, PackageData } from '../global/types';
+import { dateConversion } from '../utils/dateUtils';
 
-type DateArray = Date[];
-type NumberArray = number[];
 
-interface PackageData {
-  collected: {
-    npm: {
-      downloads: {
-        from: string;
-        count: number;
-      }[];
-    };
-  };
-}
 
 export default function DownloadsGraph({ packageOne, packageTwo }: { packageOne: PackageData; packageTwo: PackageData; }) {
   const [xDataPoints1, setXDataPoints1] = useState<DateArray>([]);
@@ -27,22 +17,16 @@ export default function DownloadsGraph({ packageOne, packageTwo }: { packageOne:
   const [yDataPoints2, setYDataPoints2] = useState<NumberArray>([]);
 
   useEffect(() => {
-    function dateConversion(packageData: PackageData, setXDataPoints: (points: DateArray) => void, setYDataPoints: (points: NumberArray) => void) {
-      const newDataPoints = packageData.collected.npm.downloads.map(object => new Date(object.from));
-      setXDataPoints(prevDataPoints => [...prevDataPoints, ...newDataPoints]);
-      const extractedDownloads = packageData.collected.npm.downloads.map(object => object.count);
-      setYDataPoints(prevDataPoints => [...prevDataPoints, ...extractedDownloads]);
-    }
-
     dateConversion(packageOne, setXDataPoints1, setYDataPoints1);
     dateConversion(packageTwo, setXDataPoints2, setYDataPoints2);
   }, [packageOne, packageTwo]);
 
   const formatYAxis = (value: number) => numeral(value).format('0.0a'); 
+  const isDataAvailable = (xDataPoints1.length > 0 && yDataPoints1.length > 0) && (xDataPoints2.length > 0 && yDataPoints2.length > 0);
 
   return (
     <>
-      {(xDataPoints1.length > 0 && yDataPoints1.length > 0) && (xDataPoints2.length > 0 && yDataPoints2.length > 0) && (
+      {(isDataAvailable) && (
         <Stack sx={{ marginTop: 12 }}>
           <div style={{ marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
             <Typography variant='h3' sx={{marginBottom:2}}> Downloads</Typography>

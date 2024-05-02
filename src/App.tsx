@@ -4,9 +4,7 @@ import SearchBox from './components/SearchBox'
 function App() {
 
   return (
-    <>
     <SearchBox/>
-    </>
   )
 }
 
