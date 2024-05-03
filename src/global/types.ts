@@ -65,3 +65,18 @@ export interface PackageData {
     };
   };
 }
+
+export type TTableComponentProps = {
+  rows: Array<TRows>;
+  firstPackageName: string | undefined;
+  secondPackageName: string | undefined;
+};
+
+export type TComparisonTableProps = {
+  selectedPackages: TPackage[];
+};
+
+export interface TPackageRecommenderProps {
+  packageOne: TPackage;
+  packageTwo: TPackage;
+}

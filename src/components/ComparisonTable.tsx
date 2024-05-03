@@ -1,44 +1,39 @@
 import { useState, useEffect } from "react";
 import DownloadsGraph from "./DownloadsGraph";
-import { TPackage } from "../global/types";
-import { TRows } from "../global/types";
+import { TPackage,TComparisonTableProps } from "../global/types";
 import { fetchData } from "../utils/apiUtils";
 import { rowFormatter } from "../utils/rowFormatter";
 import TableComponent from "./TableComponent";
 
-export default function ComparisonTable({ selectedPackages }) {
+
+
+export default function ComparisonTable({ selectedPackages }:TComparisonTableProps) {
   const [firstPackageData, setfirstPackageData] = useState<
     TPackage | undefined
   >();
   const [secondPackageData, setSecondPackageData] = useState<
     TPackage | undefined
   >();
-  const [rows, setRows] = useState<Array<TRows>>([]);
-
+  
   useEffect(() => {
-    const promiseOne = fetchData(
+    const pkgOnePromise = fetchData(
       selectedPackages[0].package.name,
       setfirstPackageData,
     );
-    const promiseTwo = fetchData(
+    const pkgTwoPromise = fetchData(
       selectedPackages[1].package.name,
       setSecondPackageData,
     );
-    Promise.all([promiseOne, promiseTwo]);
+    Promise.all([pkgOnePromise, pkgTwoPromise]);
   }, [selectedPackages]);
-
-  useEffect(() => {
-    if (firstPackageData && secondPackageData) {
-      setRows(rowFormatter(firstPackageData, secondPackageData));
-    }
-  }, [firstPackageData, secondPackageData]);
+ 
 
   return (
     <>
-      {firstPackageData && secondPackageData && (
+      {firstPackageData && secondPackageData&&(
         <>
           <TableComponent
-            rows={rows}
+            rows={rowFormatter(firstPackageData, secondPackageData)}
             firstPackageName={firstPackageData?.collected.metadata.name}
             secondPackageName={secondPackageData?.collected.metadata.name}
           />

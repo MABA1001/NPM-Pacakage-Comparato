@@ -6,8 +6,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './../styles/tableStyles.css'
+import { TTableComponentProps } from '../global/types';
 
-export default function TableComponent({ rows,firstPackageName ,secondPackageName }) {
+export default function TableComponent({ rows,firstPackageName ,secondPackageName }: TTableComponentProps) {
   
   return (
        <TableContainer component={Paper} elevation={5} className='table-container' sx={{width: "65%"}} >
@@ -32,5 +33,4 @@ export default function TableComponent({ rows,firstPackageName ,secondPackageNam
     </TableBody>
   </Table>
 </TableContainer>)
-
 }

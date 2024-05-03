@@ -3,10 +3,12 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import { calculateScore } from "../utils/scoreUtil";
+import { TPackageRecommenderProps} from "../global/types";
 import "./../styles/recommenderStyles.css"
 
 
-export default function PackageRecommender({ packageOne, packageTwo }) {
+
+export default function PackageRecommender({ packageOne, packageTwo }:TPackageRecommenderProps) {
   const scoreOne = calculateScore(packageOne);
   const scoreTwo = calculateScore(packageTwo);
   const betterPackage =

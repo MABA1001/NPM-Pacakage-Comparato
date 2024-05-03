@@ -10,12 +10,12 @@ import { useDebouncedCallback } from "use-debounce";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { getPackagesApiCall } from "./../utils/apiUtils";
+import { TPackage } from "../global/types";
 
 export default function Tags() {
   //variable initializations
-  const [inputValue, setInputValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedPacakges, setSelectedPackages] = useState([]);
+  const [selectedPacakges, setSelectedPackages] = useState<TPackage[]>([]);
   const [comparisonCheck, setComparisonCheck] = useState(false);
   const [displayNotification, setDisplayNotification] = useState(false);
 
@@ -30,7 +30,6 @@ export default function Tags() {
 
   //handel text change in search filed
   const handleInputChange = (event, value: string): void => {
-    setInputValue(value);
     debounced(value);
   };
 
@@ -62,11 +61,11 @@ export default function Tags() {
     }
   };
 
-  function handelOptionLabel(option) {
+  function handelOptionLabel(option:Boolean) {
     return option.package.name;
   }
 
-  function handelOptionDisable(option) {
+  function handelOptionDisable() {
     return selectedPacakges.length === 2 ? true : false;
   }
 
